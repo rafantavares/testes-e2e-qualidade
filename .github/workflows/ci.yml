@@ -27,7 +27,7 @@ jobs:
       - run: npm run typecheck
 
   testes:
-    name: Testes Playwright
+    name: Testes (shard ${{ matrix.shard }}/4)
     runs-on: ubuntu-latest
     timeout-minutes: 20
     # Imagem oficial com navegadores e fontes fixos: a renderização fica idêntica
@@ -36,6 +36,11 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.64.1-noble
       options: --user 1001
+    strategy:
+      # Um shard falhar não cancela os outros: o relatório final mostra todas as falhas.
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -43,22 +48,57 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Todos os projetos (Chromium, Firefox, WebKit, mobile, API, a11y e visual)
+      # são divididos entre os 4 shards, teste a teste (fullyParallel).
       - name: Rodar a suíte
-        run: npx playwright test
-      - name: Publicar relatório como artefato
+        run: npx playwright test --shard=${{ matrix.shard }}/4
+      - name: Publicar relatório parcial (blob)
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: relatorio-playwright
-          path: playwright-report/
-          retention-days: 14
+          name: blob-report-${{ matrix.shard }}
+          path: blob-report/
+          retention-days: 1
       # Snapshots novos (ou alterados com --update-snapshots) ficam disponíveis
       # para revisão e commit, já que a baseline de Linux só pode nascer aqui.
       - name: Publicar snapshots de Linux
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: snapshots-linux
+          name: snapshots-linux-${{ matrix.shard }}
           path: tests/visual/__snapshots__/*-linux.png
           if-no-files-found: ignore
           retention-days: 7
+
+  relatorio:
+    name: Testes Playwright
+    # Junta os relatórios dos shards em um HTML único. Também serve de check
+    # agregado: só passa se todos os shards passarem.
+    if: ${{ !cancelled() }}
+    needs: testes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          path: todos-blob-reports
+          pattern: blob-report-*
+          merge-multiple: true
+      - name: Gerar relatório HTML
+        run: npx playwright merge-reports --reporter html ./todos-blob-reports
+      - name: Publicar relatório como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-playwright
+          path: playwright-report/
+          retention-days: 14
+      - name: Falhar se algum shard falhou
+        if: ${{ needs.testes.result != 'success' }}
+        run: |
+          echo "::error::Algum shard falhou (resultado: ${{ needs.testes.result }}). Veja o relatório."
+          exit 1

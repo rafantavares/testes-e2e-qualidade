@@ -91,3 +91,11 @@ th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--borda); 
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+/* Em telas estreitas a tabela rola dentro do próprio container, sem empurrar a página. */
+/* position: relative mantém dentro do container o texto .sr-only (absoluto) do cabeçalho. */
+.tabela-rolavel { overflow-x: auto; position: relative; }
+@media (max-width: 600px) {
+  .topo, main { padding: 12px 16px; }
+  th, td { padding: 6px; }
+  td { white-space: nowrap; }
+}

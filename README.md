@@ -16,7 +16,7 @@ Testar manualmente não escala. Este projeto mostra como estruturar uma suíte d
 | API | Playwright `request` | Contratos e códigos de status |
 | Acessibilidade | axe-core | Violações WCAG nas páginas principais |
 | Regressão visual | Screenshots do Playwright | Comparação de telas entre versões |
-| Multinavegador | Chromium, Firefox, WebKit | Mesmo teste em três engines |
+| Multinavegador e mobile | Chromium, Firefox, WebKit e Pixel 7 | Mesmos fluxos E2E em três engines e num celular |
 
 A aplicação alvo é a [Loja Demo](demo-app/), uma loja fictícia mantida neste repositório e iniciada automaticamente pelos testes (decisão registrada em [docs/decisoes.md](docs/decisoes.md)).
 
@@ -54,7 +54,7 @@ docs/           decisões, plano de testes e retrospectiva
 | **M1 – Fundação** | Projeto Playwright, escolha do alvo, CI básico | ✅ |
 | **M2 – Fluxos E2E** | Page Objects e fluxos críticos cobertos | ✅ |
 | **M3 – API e acessibilidade** | Testes de API e verificação com axe | ✅ |
-| **M4 – Visual e multinavegador** | Regressão visual e matriz de navegadores | ⏳ |
+| **M4 – Visual e multinavegador** | Regressão visual e matriz de navegadores | ✅ |
 | **M5 – Relatórios** | Relatório publicado, plano de testes e métricas de qualidade | ⏳ |
 
 ## Como rodar
@@ -70,7 +70,17 @@ npx playwright show-report
 
 O Playwright sobe a loja sozinho (na porta 3100, ou `PORT`) antes dos testes. Scripts úteis: `npm run demo` (só a loja, em http://localhost:3000), `npm run lint`, `npm run typecheck` e `npm test`.
 
-No CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) a suíte roda com *retries* (2) e guarda *trace*, vídeo e screenshot apenas das falhas; o relatório HTML fica disponível como artefato do *workflow*.
+No CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) a suíte roda no container oficial do Playwright, dividida em **4 shards** paralelos; um job final junta os relatórios em um HTML único (artefato `relatorio-playwright`). Há *retries* (2), e *trace*, vídeo e screenshot são guardados apenas das falhas.
+
+| Projeto | O que roda | Navegador |
+|---|---|---|
+| `chromium`, `firefox`, `webkit` | `tests/e2e` | Desktop |
+| `mobile` | `tests/e2e` | Pixel 7 (Chromium, toque, 412 px) |
+| `api` | `tests/api` | — |
+| `a11y` | `tests/a11y` | Chromium |
+| `visual` | `tests/visual` | Chromium |
+
+Para rodar um projeto só: `npx playwright test --project=mobile`.
 
 ## Regressão visual
 

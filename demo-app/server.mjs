@@ -247,7 +247,7 @@ function telaCarrinho(res, sessao, erro = '', status = 200) {
   const corpo =
     itens.length === 0
       ? '<p>Seu carrinho está vazio.</p><p><a href="/">Continuar comprando</a></p>'
-      : `<table>
+      : `<div class="tabela-rolavel"><table>
           <caption class="sr-only">Itens no carrinho</caption>
           <thead><tr><th scope="col">Produto</th><th scope="col">Quantidade</th><th scope="col">Preço unitário</th><th scope="col">Subtotal</th><th scope="col"><span class="sr-only">Ações</span></th></tr></thead>
           <tbody>${itens
@@ -262,7 +262,7 @@ function telaCarrinho(res, sessao, erro = '', status = 200) {
               </tr>`,
             )
             .join('')}</tbody>
-        </table>
+        </table></div>
         <p class="total">Total: <strong>${moeda.format(total)}</strong></p>
         <p><a class="botao" href="/checkout">Finalizar compra</a></p>`;
   pagina(res, { titulo: 'Carrinho', sessao, status, conteudo: `<h1>Carrinho</h1>${alerta(erro)}${corpo}` });

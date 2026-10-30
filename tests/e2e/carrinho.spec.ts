@@ -73,6 +73,20 @@ test.describe('Carrinho', () => {
     );
   });
 
+  test('a página do carrinho não rola na horizontal', async ({ page, entrarComo, catalogo, carrinho }) => {
+    // Regressão: no perfil mobile a tabela estourava a largura da tela e cobria o botão "Remover".
+    await entrarComo();
+    await catalogo.abrir();
+    await catalogo.adicionarAoCarrinho(produtos.monitor27.nome);
+    await expect(carrinho.itens).toHaveCount(1);
+
+    const larguras = await page.evaluate(() => ({
+      conteudo: document.documentElement.scrollWidth,
+      tela: document.documentElement.clientWidth,
+    }));
+    expect(larguras.conteudo).toBeLessThanOrEqual(larguras.tela);
+  });
+
   test('visitante sem login é levado à tela de login ao adicionar', async ({ catalogo, login }) => {
     await catalogo.abrir();
     await catalogo.adicionarAoCarrinho(produtos.teclado.nome);
