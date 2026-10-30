@@ -24,6 +24,7 @@ A aplicação alvo é a [Loja Demo](demo-app/), uma loja fictícia mantida neste
 
 - [Plano de testes](docs/plano-de-testes.md) — escopo, riscos priorizados, tipos de teste e critérios de entrada e saída
 - [Registro de decisões](docs/decisoes.md)
+- [Retrospectiva M1–M5](docs/retrospectiva.md) — o que foi entregue, defeitos encontrados e pendências
 
 ## Estrutura
 
