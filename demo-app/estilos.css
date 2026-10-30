@@ -1,0 +1,93 @@
+:root {
+  --fundo: #f7f7f5;
+  --superficie: #ffffff;
+  --texto: #1d1d1b;
+  --suave: #55554f;
+  --borda: #d6d6d0;
+  --primaria: #1f5130;
+  --primaria-texto: #ffffff;
+  --erro-fundo: #fdecea;
+  --erro-texto: #8a1c12;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background: var(--fundo);
+  color: var(--texto);
+}
+a { color: var(--primaria); }
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--superficie);
+  border-bottom: 1px solid var(--borda);
+}
+.topo nav { display: flex; gap: 16px; align-items: center; }
+.topo form { margin: 0; }
+.marca { font-weight: bold; font-size: 20px; text-decoration: none; color: var(--texto); }
+main { max-width: 960px; margin: 0 auto; padding: 24px; }
+h1 { margin-top: 0; }
+button, .botao {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--primaria);
+  color: var(--primaria-texto);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+button.secundario { background: transparent; color: var(--primaria); border: 1px solid var(--primaria); }
+button.link { background: none; color: var(--primaria); padding: 0; text-decoration: underline; }
+input[type="search"], input[type="email"], input[type="password"], input:not([type]) {
+  padding: 8px;
+  border: 1px solid var(--suave);
+  border-radius: 4px;
+  font: inherit;
+}
+.busca { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 24px; }
+.formulario { display: grid; gap: 8px; max-width: 420px; }
+.formulario button { justify-self: start; margin-top: 8px; }
+fieldset { border: 1px solid var(--borda); border-radius: 4px; display: grid; gap: 4px; }
+.produtos {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.produto { background: var(--superficie); border: 1px solid var(--borda); border-radius: 6px; padding: 16px; }
+.produto h2 { font-size: 18px; margin: 0 0 4px; }
+.categoria { color: var(--suave); margin: 0; }
+.preco { font-size: 20px; font-weight: bold; margin: 8px 0; }
+.esgotado { color: var(--erro-texto); font-weight: bold; }
+table { width: 100%; border-collapse: collapse; background: var(--superficie); }
+th, td { text-align: left; padding: 8px; border-bottom: 1px solid var(--borda); }
+.total { font-size: 20px; }
+.alerta {
+  background: var(--erro-fundo);
+  color: var(--erro-texto);
+  border: 1px solid var(--erro-texto);
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+.rodape { text-align: center; color: var(--suave); padding: 24px; font-size: 14px; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
