@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
-const PORTA = Number(process.env.PORT ?? 3000);
+// Porta própria dos testes, para não colidir com servidores de desenvolvimento na 3000.
+const PORTA = Number(process.env.PORT ?? 3100);
 const noCI = !!process.env.CI;
 
 export default defineConfig({
