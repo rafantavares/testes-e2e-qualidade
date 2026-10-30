@@ -36,7 +36,7 @@ export const test = base.extend<Fixtures>({
   entrarComo: async ({ context, request, baseURL }, use) => {
     await use(async (cliente = clientes.ana) => {
       const token = await obterToken(request, cliente);
-      await context.addCookies([{ name: 'sessao', value: token, url: baseURL ?? 'http://localhost:3100' }]);
+      await context.addCookies([{ name: 'sessao', value: token, url: baseURL ?? 'http://localhost:3000' }]);
     });
   },
 });

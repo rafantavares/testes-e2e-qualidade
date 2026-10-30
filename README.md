@@ -52,7 +52,7 @@ docs/           decisões, plano de testes e retrospectiva
 | Milestone | Entrega | Status |
 |---|---|---|
 | **M1 – Fundação** | Projeto Playwright, escolha do alvo, CI básico | ✅ |
-| **M2 – Fluxos E2E** | Page Objects e fluxos críticos cobertos | ✅ |
+| **M2 – Fluxos E2E** | Page Objects e fluxos críticos cobertos | ⏳ |
 | **M3 – API e acessibilidade** | Testes de API e verificação com axe | ⏳ |
 | **M4 – Visual e multinavegador** | Regressão visual e matriz de navegadores | ⏳ |
 | **M5 – Relatórios** | Relatório publicado, plano de testes e métricas de qualidade | ⏳ |
@@ -68,7 +68,7 @@ npx playwright test
 npx playwright show-report
 ```
 
-O Playwright sobe a loja sozinho (na porta 3100, ou `PORT`) antes dos testes. Scripts úteis: `npm run demo` (só a loja, em http://localhost:3000), `npm run lint`, `npm run typecheck` e `npm test`.
+O Playwright sobe a loja sozinho antes dos testes. Scripts úteis: `npm run demo` (só a loja, em http://localhost:3000), `npm run lint`, `npm run typecheck` e `npm test`.
 
 No CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) a suíte roda com *retries* (2) e guarda *trace*, vídeo e screenshot apenas das falhas; o relatório HTML fica disponível como artefato do *workflow*.
 
