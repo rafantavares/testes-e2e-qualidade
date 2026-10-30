@@ -10,8 +10,9 @@ export default defineConfig({
   forbidOnly: noCI,
   retries: noCI ? 2 : 0,
   workers: noCI ? 2 : undefined,
+  // No CI cada shard gera um relatório "blob"; um job final junta todos em um HTML.
   reporter: noCI
-    ? [['list'], ['github'], ['html', { open: 'never' }]]
+    ? [['list'], ['github'], ['blob']]
     : [['list'], ['html', { open: 'never' }]],
   // A renderização de fontes muda entre sistemas operacionais, então cada SO tem a
   // própria baseline (o CI usa a de Linux, gerada no container oficial do Playwright).
@@ -38,6 +39,8 @@ export default defineConfig({
     { name: 'chromium', testMatch: 'e2e/**', use: { ...devices['Desktop Chrome'] } },
     { name: 'firefox', testMatch: 'e2e/**', use: { ...devices['Desktop Firefox'] } },
     { name: 'webkit', testMatch: 'e2e/**', use: { ...devices['Desktop Safari'] } },
+    // Perfil mobile: viewport pequeno, toque e user agent de celular.
+    { name: 'mobile', testMatch: 'e2e/**', use: { ...devices['Pixel 7'] } },
     // Testes de API não abrem navegador; rodar em cada engine só repetiria o mesmo teste.
     { name: 'api', testMatch: 'api/**' },
     // O axe avalia o DOM e a árvore de acessibilidade; um navegador basta.
