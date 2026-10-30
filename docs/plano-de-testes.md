@@ -101,7 +101,7 @@ Uma mudança pode ser integrada na `main` quando:
 | R5 | `tests/e2e/carrinho.spec.ts`, `tests/api/carrinho.spec.ts` |
 | R6 | `tests/api/*` (validação de schema) |
 | R7 | `tests/a11y/paginas.spec.ts` |
-| R8 | `tests/visual/telas.spec.ts` |
-| R9 | Matriz de projetos em `playwright.config.ts` e no CI |
+| R8 | `tests/visual/telas.spec.ts`, `tests/e2e/carrinho.spec.ts` (sem rolagem horizontal) |
+| R9 | Projetos `chromium`, `firefox`, `webkit` e `mobile` em `playwright.config.ts`, em 4 shards no CI |
 
-A tabela é atualizada conforme os testes são criados nos milestones M2 a M4.
+Todos os arquivos acima existem desde o M4 (ver [retrospectiva](retrospectiva.md)).
