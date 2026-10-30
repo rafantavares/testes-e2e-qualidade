@@ -20,6 +20,11 @@ Testar manualmente não escala. Este projeto mostra como estruturar uma suíte d
 
 A aplicação alvo é a [Loja Demo](demo-app/), uma loja fictícia mantida neste repositório e iniciada automaticamente pelos testes (decisão registrada em [docs/decisoes.md](docs/decisoes.md)).
 
+## Documentação
+
+- [Plano de testes](docs/plano-de-testes.md) — escopo, riscos priorizados, tipos de teste e critérios de entrada e saída
+- [Registro de decisões](docs/decisoes.md)
+
 ## Estrutura
 
 ```
@@ -46,7 +51,7 @@ docs/           decisões, plano de testes e retrospectiva
 
 | Milestone | Entrega | Status |
 |---|---|---|
-| **M1 – Fundação** | Projeto Playwright, escolha do alvo, CI básico | ⏳ |
+| **M1 – Fundação** | Projeto Playwright, escolha do alvo, CI básico | ✅ |
 | **M2 – Fluxos E2E** | Page Objects e fluxos críticos cobertos | ⏳ |
 | **M3 – API e acessibilidade** | Testes de API e verificação com axe | ⏳ |
 | **M4 – Visual e multinavegador** | Regressão visual e matriz de navegadores | ⏳ |
