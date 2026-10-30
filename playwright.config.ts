@@ -13,6 +13,18 @@ export default defineConfig({
   reporter: noCI
     ? [['list'], ['github'], ['html', { open: 'never' }]]
     : [['list'], ['html', { open: 'never' }]],
+  // A renderização de fontes muda entre sistemas operacionais, então cada SO tem a
+  // própria baseline (o CI usa a de Linux, gerada no container oficial do Playwright).
+  snapshotPathTemplate: '{testDir}/{testFileDir}/__snapshots__/{arg}-{platform}{ext}',
+  expect: {
+    toHaveScreenshot: {
+      // Tolerância para antialiasing: até 1% dos pixels e diferença de cor de até 20%.
+      maxDiffPixelRatio: 0.01,
+      threshold: 0.2,
+      animations: 'disabled',
+      caret: 'hide',
+    },
+  },
   use: {
     baseURL: `http://localhost:${PORTA}`,
     locale: 'pt-BR',
@@ -30,6 +42,8 @@ export default defineConfig({
     { name: 'api', testMatch: 'api/**' },
     // O axe avalia o DOM e a árvore de acessibilidade; um navegador basta.
     { name: 'a11y', testMatch: 'a11y/**', use: { ...devices['Desktop Chrome'] } },
+    // Snapshots são comparados pixel a pixel; manter um navegador evita uma baseline por engine.
+    { name: 'visual', testMatch: 'visual/**', use: { ...devices['Desktop Chrome'] } },
   ],
   webServer: {
     command: 'npm run demo',
