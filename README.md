@@ -20,6 +20,11 @@ Testar manualmente não escala. Este projeto mostra como estruturar uma suíte d
 
 A aplicação alvo é a [Loja Demo](demo-app/), uma loja fictícia mantida neste repositório e iniciada automaticamente pelos testes (decisão registrada em [docs/decisoes.md](docs/decisoes.md)).
 
+## Documentação
+
+- [Plano de testes](docs/plano-de-testes.md) — escopo, riscos priorizados, tipos de teste e critérios de entrada e saída
+- [Registro de decisões](docs/decisoes.md)
+
 ## Estrutura
 
 ```
