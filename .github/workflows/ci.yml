@@ -4,6 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -102,3 +103,46 @@ jobs:
         run: |
           echo "::error::Algum shard falhou (resultado: ${{ needs.testes.result }}). Veja o relatório."
           exit 1
+
+  publicar:
+    name: Publicar relatório no GitHub Pages
+    # Publica a cada execução na main, inclusive quando há falhas (é quando o
+    # relatório mais ajuda). Não roda em PRs: o environment github-pages só
+    # aceita deploys da branch padrão.
+    if: ${{ !cancelled() && github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
+    needs: relatorio
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: relatorio-playwright
+          path: relatorio
+      - name: Verificar se o GitHub Pages está ativado
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" --jq .build_type > /tmp/tipo 2>/dev/null; then
+            echo "ativo=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages ativo (fonte: $(cat /tmp/tipo))."
+          else
+            echo "ativo=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=GitHub Pages desativado::Ative em Settings > Pages > Source: GitHub Actions para publicar o relatório. Até lá ele fica só como artefato."
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: relatorio
+      - name: Publicar
+        id: deploy
+        if: ${{ steps.pages.outputs.ativo == 'true' }}
+        uses: actions/deploy-pages@v4

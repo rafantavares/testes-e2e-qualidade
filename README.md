@@ -2,7 +2,7 @@
 
 > Suíte de testes automatizados de ponta a ponta com Playwright — interface, API, acessibilidade e regressão visual — rodando em CI com relatório publicado a cada execução.
 
-![status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow) ![playwright](https://img.shields.io/badge/playwright-TypeScript-2EAD33) ![licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
+[![CI](https://github.com/rafantavares/testes-e2e-qualidade/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/rafantavares/testes-e2e-qualidade/actions/workflows/ci.yml) [![relatório](https://img.shields.io/badge/relat%C3%B3rio-Playwright-2EAD33)](https://rafantavares.github.io/testes-e2e-qualidade/) ![playwright](https://img.shields.io/badge/playwright-TypeScript-2EAD33) ![licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green)
 
 ## Por que este projeto existe
 
@@ -55,7 +55,7 @@ docs/           decisões, plano de testes e retrospectiva
 | **M2 – Fluxos E2E** | Page Objects e fluxos críticos cobertos | ✅ |
 | **M3 – API e acessibilidade** | Testes de API e verificação com axe | ✅ |
 | **M4 – Visual e multinavegador** | Regressão visual e matriz de navegadores | ✅ |
-| **M5 – Relatórios** | Relatório publicado, plano de testes e métricas de qualidade | ⏳ |
+| **M5 – Relatórios** | Relatório publicado, plano de testes e métricas de qualidade | 🟡 pronto no CI; falta ativar o GitHub Pages ([como](#relatório-publicado)) |
 
 ## Como rodar
 
@@ -81,6 +81,17 @@ No CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) a suíte roda no 
 | `visual` | `tests/visual` | Chromium |
 
 Para rodar um projeto só: `npx playwright test --project=mobile`.
+
+## Relatório publicado
+
+A cada execução do CI na `main`, o job **Publicar relatório no GitHub Pages** junta o relatório HTML dos shards e o publica em **https://rafantavares.github.io/testes-e2e-qualidade/** — inclusive quando há falhas, com *trace*, vídeo e screenshot de cada uma.
+
+> **Ação pendente (uma vez só):** o GitHub Pages ainda não está ativado neste repositório. Enquanto não estiver, o job conclui com um aviso e o relatório fica disponível apenas como artefato `relatorio-playwright` de cada execução.
+>
+> 1. Abra **Settings → Pages** no repositório.
+> 2. Em **Build and deployment → Source**, escolha **GitHub Actions** e salve.
+> 3. Em **Actions → CI → Run workflow**, rode o CI na `main` (ou espere o próximo push).
+> 4. O link acima e o badge **relatório** passam a funcionar.
 
 ## Regressão visual
 
