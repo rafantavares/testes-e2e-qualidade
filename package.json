@@ -1,0 +1,13 @@
+{
+  "name": "testes-e2e-qualidade",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Suíte de testes end-to-end com Playwright, relatório de qualidade e pipeline de CI no GitHub Actions.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "demo": "node demo-app/server.mjs"
+  }
+}

@@ -18,7 +18,7 @@ Testar manualmente não escala. Este projeto mostra como estruturar uma suíte d
 | Regressão visual | Screenshots do Playwright | Comparação de telas entre versões |
 | Multinavegador | Chromium, Firefox, WebKit | Mesmo teste em três engines |
 
-A aplicação alvo será definida na issue #1 (aplicação de demonstração pública ou app próprio rodando via Docker no CI).
+A aplicação alvo é a [Loja Demo](demo-app/), uma loja fictícia mantida neste repositório e iniciada automaticamente pelos testes (decisão registrada em [docs/decisoes.md](docs/decisoes.md)).
 
 ## Estrutura
 
@@ -30,6 +30,8 @@ tests/
   visual/       regressão visual
 pages/          Page Objects
 fixtures/       dados e fixtures customizadas
+demo-app/       aplicação alvo (loja de demonstração)
+docs/           decisões, plano de testes e retrospectiva
 ```
 
 ## Boas práticas aplicadas
