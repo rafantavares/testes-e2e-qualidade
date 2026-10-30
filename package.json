@@ -10,9 +10,10 @@
   "scripts": {
     "demo": "node demo-app/server.mjs",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.scripts.json",
     "test": "playwright test",
-    "report": "playwright show-report"
+    "report": "playwright show-report",
+    "metricas": "node scripts/gerar-metricas.ts"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

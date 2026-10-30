@@ -10,7 +10,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "noEmit": true,
+    "allowImportingTsExtensions": true,
     "types": ["node"]
   },
-  "include": ["playwright.config.ts", "tests/**/*.ts", "pages/**/*.ts", "fixtures/**/*.ts"]
+  "include": ["playwright.config.ts", "tests/**/*.ts", "pages/**/*.ts", "fixtures/**/*.ts", "scripts/**/*.ts"]
 }

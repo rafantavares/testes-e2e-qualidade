@@ -1,0 +1,6 @@
+{
+  // Os scripts rodam direto no Node (type stripping), que só aceita sintaxe de tipos apagável.
+  "extends": "./tsconfig.json",
+  "compilerOptions": { "erasableSyntaxOnly": true },
+  "include": ["scripts/**/*.ts"]
+}

@@ -59,6 +59,7 @@ Probabilidade (P) e impacto (I) de 1 a 3; prioridade = P × I. Os riscos de maio
 | API | `tests/api/` | Um projeto só (não depende de navegador) | Fixture `request` do Playwright; schemas em `fixtures/` |
 | Acessibilidade | `tests/a11y/` | Chromium | `@axe-core/playwright`, tags WCAG 2.1 A/AA |
 | Regressão visual | `tests/visual/` | Chromium | Snapshots versionados, gerados no Linux (mesmo SO do CI) |
+| Unitário | `tests/unidade/` | Um projeto só (sem navegador) | Scripts de apoio, como o cálculo das métricas de qualidade |
 
 Pirâmide pretendida: a maior parte das regras de negócio é verificada pela API (rápida e estável); os E2E cobrem os caminhos que o usuário percorre de ponta a ponta; visual e acessibilidade ficam nas páginas principais.
 
@@ -103,5 +104,8 @@ Uma mudança pode ser integrada na `main` quando:
 | R7 | `tests/a11y/paginas.spec.ts` |
 | R8 | `tests/visual/telas.spec.ts`, `tests/e2e/carrinho.spec.ts` (sem rolagem horizontal) |
 | R9 | Projetos `chromium`, `firefox`, `webkit` e `mobile` em `playwright.config.ts`, em 4 shards no CI |
+| R10 | A suíte inteira: taxa de *flaky* acompanhada nas métricas de qualidade |
 
 Todos os arquivos acima existem desde o M4 (ver [retrospectiva](retrospectiva.md)).
+
+Esta tabela também está codificada em `scripts/metricas.ts` (`RISCOS`): a cada execução do CI, as [métricas de qualidade](https://rafantavares.github.io/testes-e2e-qualidade/metricas/) mostram quantos testes cobrem cada risco e se todos passaram, o que verifica os critérios de saída 4 e 5 automaticamente. Ao mudar esta seção, atualize as duas.
