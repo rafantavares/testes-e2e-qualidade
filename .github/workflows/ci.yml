@@ -30,6 +30,12 @@ jobs:
     name: Testes Playwright
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Imagem oficial com navegadores e fontes fixos: a renderização fica idêntica
+    # entre execuções, o que a regressão visual exige. A versão acompanha a do
+    # @playwright/test no package.json.
+    container:
+      image: mcr.microsoft.com/playwright:v1.64.1-noble
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -37,8 +43,6 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - name: Instalar navegadores
-        run: npx playwright install --with-deps
       - name: Rodar a suíte
         run: npx playwright test
       - name: Publicar relatório como artefato
@@ -48,3 +52,13 @@ jobs:
           name: relatorio-playwright
           path: playwright-report/
           retention-days: 14
+      # Snapshots novos (ou alterados com --update-snapshots) ficam disponíveis
+      # para revisão e commit, já que a baseline de Linux só pode nascer aqui.
+      - name: Publicar snapshots de Linux
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshots-linux
+          path: tests/visual/__snapshots__/*-linux.png
+          if-no-files-found: ignore
+          retention-days: 7

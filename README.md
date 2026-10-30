@@ -72,6 +72,14 @@ O Playwright sobe a loja sozinho (na porta 3100, ou `PORT`) antes dos testes. Sc
 
 No CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) a suíte roda com *retries* (2) e guarda *trace*, vídeo e screenshot apenas das falhas; o relatório HTML fica disponível como artefato do *workflow*.
 
+## Regressão visual
+
+As baselines ficam em `tests/visual/__snapshots__/`, uma por sistema operacional (`*-linux.png` é a usada no CI, `*-win32.png` a do Windows). Para aceitar uma mudança visual intencional:
+
+1. Rode `npx playwright test --project visual --update-snapshots` no seu SO.
+2. Para Linux, baixe o artefato **snapshots-linux** da execução do CI e copie os PNGs para a pasta.
+3. Revise as imagens antes de commitar.
+
 ## Autor
 
 **Rafael Nunes Tavares** — estudante de Engenharia de Software (ULBRA Palmas)
