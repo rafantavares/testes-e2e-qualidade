@@ -119,7 +119,7 @@ function listaProdutos(itens) {
           p.estoque > 0
             ? `<form method="post" action="/carrinho/adicionar">
                  <input type="hidden" name="produtoId" value="${p.id}">
-                 <button type="submit" aria-label="Adicionar ${escapar(p.nome)} ao carrinho">Adicionar ao carrinho</button>
+                 <button type="submit">Adicionar ao carrinho<span class="sr-only"> ${escapar(p.nome)}</span></button>
                </form>`
             : '<p class="esgotado">Esgotado</p>'
         }

@@ -28,6 +28,8 @@ export default defineConfig({
     { name: 'webkit', testMatch: 'e2e/**', use: { ...devices['Desktop Safari'] } },
     // Testes de API não abrem navegador; rodar em cada engine só repetiria o mesmo teste.
     { name: 'api', testMatch: 'api/**' },
+    // O axe avalia o DOM e a árvore de acessibilidade; um navegador basta.
+    { name: 'a11y', testMatch: 'a11y/**', use: { ...devices['Desktop Chrome'] } },
   ],
   webServer: {
     command: 'npm run demo',
