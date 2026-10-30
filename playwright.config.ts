@@ -22,9 +22,12 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    // Testes de interface: rodam em todos os navegadores.
+    { name: 'chromium', testMatch: 'e2e/**', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', testMatch: 'e2e/**', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', testMatch: 'e2e/**', use: { ...devices['Desktop Safari'] } },
+    // Testes de API não abrem navegador; rodar em cada engine só repetiria o mesmo teste.
+    { name: 'api', testMatch: 'api/**' },
   ],
   webServer: {
     command: 'npm run demo',
