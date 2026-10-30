@@ -1,6 +1,6 @@
 # Retrospectiva — M1 a M5
 
-**Período:** 29 a 30/10/2026 · **Issues:** #1 a #10 · **PRs:** #11 a #21
+**Período:** 29 a 30/10/2026 · **Issues:** #1 a #10 · **PRs:** #11 a #23
 
 ## O que foi entregue
 
@@ -15,7 +15,7 @@
 | | #7 | #17 | axe-core em 11 estados de página (WCAG 2.1 A/AA) |
 | M4 – Visual e multinavegador | #8 | #18 | 7 snapshots visuais com máscara e tolerância, baseline por SO |
 | | #9 | #19 | Perfil mobile (Pixel 7) e CI em 4 shards com relatório unificado |
-| M5 – Relatórios | #10 | #20 | Publicação do relatório no GitHub Pages (aguarda ativação, ver pendências) |
+| M5 – Relatórios | #10 | #20, #23 | Relatório publicado no GitHub Pages a cada execução na `main` |
 | — | — | #21 | Correção de um teste flaky detectado na `main` |
 
 ### Números finais
@@ -64,7 +64,6 @@ A aplicação é pequena e foi escrita junto com os testes, mesmo assim a suíte
 
 | Item | Responsável | Como resolver |
 |---|---|---|
-| Ativar o GitHub Pages (#10 continua aberta) | Rafael (configuração do repositório) | **Settings → Pages → Source: GitHub Actions** e depois **Actions → CI → Run workflow**. Passo a passo no README e na issue. |
 | "Métricas de qualidade" citadas no Roadmap do M5 | — | Não havia issue para isso. Sugestão: uma issue para extrair do relatório JSON a taxa de *flaky*, a duração por projeto e a cobertura de riscos do plano. |
 | Baseline visual de macOS | — | Só existem `linux` e `win32`. Quem rodar no macOS precisa gerar a própria com `--update-snapshots`. |
 | Branch protection na `main` | Rafael | Exigir PR e o check **Testes Playwright** evitaria pushes diretos como o que aconteceu na #5. |
