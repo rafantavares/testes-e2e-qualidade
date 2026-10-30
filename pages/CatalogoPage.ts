@@ -43,5 +43,9 @@ export class CatalogoPage {
 
   async adicionarAoCarrinho(nome: string): Promise<void> {
     await this.botaoAdicionar(nome).click();
+    // O botão envia um formulário (POST + redirecionamento). Sem esperar a página
+    // sair do catálogo, um goto() logo em seguida pode cancelar o envio e a
+    // adição se perde (aconteceu no WebKit do CI).
+    await this.page.waitForURL((url) => url.pathname !== '/' && url.pathname !== '/busca');
   }
 }
