@@ -38,7 +38,7 @@ export class CatalogoPage {
   }
 
   botaoAdicionar(nome: string): Locator {
-    return this.produto(nome).getByRole('button', { name: `Adicionar ${nome} ao carrinho` });
+    return this.produto(nome).getByRole('button', { name: `Adicionar ao carrinho ${nome}` });
   }
 
   async adicionarAoCarrinho(nome: string): Promise<void> {
