@@ -64,6 +64,6 @@ A aplicação é pequena e foi escrita junto com os testes, mesmo assim a suíte
 
 | Item | Responsável | Como resolver |
 |---|---|---|
-| "Métricas de qualidade" citadas no Roadmap do M5 | — | Não havia issue para isso. Sugestão: uma issue para extrair do relatório JSON a taxa de *flaky*, a duração por projeto e a cobertura de riscos do plano. |
+| ~~"Métricas de qualidade" citadas no Roadmap do M5~~ | — | Resolvido na #24: taxa de *flaky*, duração por projeto e cobertura de riscos, publicadas em `/metricas/` no GitHub Pages. |
 | Baseline visual de macOS | — | Só existem `linux` e `win32`. Quem rodar no macOS precisa gerar a própria com `--update-snapshots`. |
 | Branch protection na `main` | Rafael | Exigir PR e o check **Testes Playwright** evitaria pushes diretos como o que aconteceu na #5. |

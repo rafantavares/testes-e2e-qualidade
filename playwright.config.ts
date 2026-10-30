@@ -47,6 +47,8 @@ export default defineConfig({
     { name: 'a11y', testMatch: 'a11y/**', use: { ...devices['Desktop Chrome'] } },
     // Snapshots são comparados pixel a pixel; manter um navegador evita uma baseline por engine.
     { name: 'visual', testMatch: 'visual/**', use: { ...devices['Desktop Chrome'] } },
+    // Testes unitários dos scripts de apoio (ex.: cálculo das métricas); não usam navegador.
+    { name: 'unidade', testMatch: 'unidade/**' },
   ],
   webServer: {
     command: 'npm run demo',

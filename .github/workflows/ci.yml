@@ -91,7 +91,13 @@ jobs:
           pattern: blob-report-*
           merge-multiple: true
       - name: Gerar relatório HTML
-        run: npx playwright merge-reports --reporter html ./todos-blob-reports
+        run: npx playwright merge-reports --reporter html,json ./todos-blob-reports
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_FILE: resultados.json
+      # Totais, taxa de flaky, duração por projeto e cobertura dos riscos do plano.
+      # Vão para o resumo do job e para /metricas/ dentro do relatório publicado.
+      - name: Gerar métricas de qualidade
+        run: npm run metricas -- resultados.json playwright-report/metricas
       - name: Publicar relatório como artefato
         uses: actions/upload-artifact@v4
         with:
